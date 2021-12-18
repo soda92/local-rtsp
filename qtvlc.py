@@ -24,11 +24,10 @@ Date: 25 December 2018
 """
 
 import platform
-import os
-# os.add_dll_directory("C:/Program Files/VideoLAN/VLC")
 import sys
 
 from PyQt5 import QtWidgets, QtGui, QtCore
+from PyQt5.QtCore import QProcess
 import vlc
 
 class Player(QtWidgets.QMainWindow):
@@ -36,7 +35,8 @@ class Player(QtWidgets.QMainWindow):
     """
 
     def __init__(self, master=None):
-        QtWidgets.QMainWindow.__init__(self, master)
+        QtWidgets.QMainWindow.__init__(self, master, QtCore.Qt.WindowStaysOnTopHint)
+
         self.setWindowTitle("Media Player")
 
         # Create a basic vlc instance
@@ -219,6 +219,10 @@ def main():
     player = Player()
     player.show()
     player.resize(640, 480)
+    p = QProcess()
+    p.setProgram('D:/src/local-rtsp/rtsp-simple-server.exe')
+    p.setWorkingDirectory("D:/src/local-rtsp/")
+    p.start()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
