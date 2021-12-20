@@ -51,6 +51,8 @@ class Player(QtWidgets.QMainWindow):
         self.create_ui()
         self.is_paused = False
 
+        
+
     def create_ui(self):
         """Set up the user interface, signals & slots
         """
@@ -153,13 +155,16 @@ class Player(QtWidgets.QMainWindow):
         # self.media = self.instance.media_new(filename[0])
 
         # Put the media in the media player
-        self.mediaplayer.set_mrl("rtsp://192.168.104.1:8554/webcam")
+        ip = ""
+        with open("ip.txt", mode='r') as f:
+            ip = f.readline().strip()
+        self.mediaplayer.set_mrl(f"rtsp://admin:hk123456@{ip}:554/Streaming/Channels/101")
 
         # Parse the metadata of the file
         # self.media.parse()
 
         # Set the title of the track as window title
-        self.setWindowTitle("rtsp://192.168.104.1:8554/webcam")
+        self.setWindowTitle("RTSP test")
 
         # The media player has to be 'connected' to the QFrame (otherwise the
         # video would be displayed in it's own window). This is platform
