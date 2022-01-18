@@ -125,7 +125,7 @@ hlsAllowOrigin: '*'
 paths:
   webcam:
   # ffmpeg -f dshow -i video="Integrated Webcam" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:8554/webcam
-    runOnInit: ffmpeg -f dshow -i video="Integrated Webcam" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH
+    runOnInit: ffmpeg -f dshow -i video="Integrated Webcam":audio="麦克风 (Realtek Audio)" -filter:a "volume=20dB" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH
     runOnInitRestart: yes
 
   all:
