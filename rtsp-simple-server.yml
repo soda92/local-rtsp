@@ -123,9 +123,12 @@ hlsAllowOrigin: '*'
 # the settings under the path "all" are applied to all paths that do not match
 # another entry.
 paths:
-  webcam:
-  # ffmpeg -f dshow -i video="Integrated Webcam" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:8554/webcam
-    runOnInit: ffmpeg -f dshow -i video="Integrated Webcam":audio="麦克风 (Realtek Audio)" -filter:a "volume=20dB" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH
+  # webcam:
+  # # ffmpeg -f dshow -i video="Integrated Webcam" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:8554/webcam
+  #   runOnInit: ffmpeg -f dshow -i video="Integrated Webcam":audio="麦克风 (Realtek Audio)" -filter:a "volume=20dB" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 600k -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH
+  #   runOnInitRestart: yes
+  video:
+    runOnInit: ffmpeg -re -stream_loop -1 -i video5.mkv -c copy -f rtsp rtsp://localhost:$RTSP_PORT/$RTSP_PATH
     runOnInitRestart: yes
 
   all:
